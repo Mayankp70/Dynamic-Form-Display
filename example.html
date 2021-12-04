@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Form</title>
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="css/util.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!--===============================================================================================-->
+</head>
+
+<body>
+    <div class="container-contact100">
+        <div class="wrap-contact100">
+            <form id="myFrom" class="contact100-form validate-form">
+                <span class="contact100-form-title">
+                    Registration Form
+                </span>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let abc = [
+            {
+                id: 1,
+                class: "input100",
+                type: "text",
+                placeholder: "Enter your first name",
+                showLable: true,
+                arrayentElementsClass: '',
+                lableText: 'First Name',
+                value: '',
+                IsRequied: true,
+                validations: [{ pattern: "[A-Za-z]{15}", errorMessage: 'Plase Enter Valid Name' }]
+            },
+            {
+                id: 2,
+                class: "input100",
+                type: "date",
+                placeholder: "Enter your Brithday",
+                showLable: true,
+                arrayentElementsClass: '',
+                lableText: 'Brith Date',
+                value: '',
+                IsRequied: false,
+                validations: [{ pattern: "[0-9]{3}", errorMessage: '' }]
+            },
+            {
+                id: 3,
+                class: "input100",
+                type: "radio",
+                placeholder: "Enter your email id",
+                showLable: true,
+                arrayentElementsClass: '',
+                lableText: 'Gander',
+                defultchecked: "Female",
+                value: ["Male", "Female", "Other"],
+                IsRequied: true
+            },
+            {
+                id: 4,
+                class: "input100",
+                type: "checkbox",
+                placeholder: "Enter your email id",
+                showLable: true,
+                arrayentElementsClass: '',
+                lableText: 'Hobbies',
+                value: ["Cricket", "Football", "Chess"],
+                IsRequied: true
+            },
+            {
+                id: 5,
+                class: "input100",
+                type: "select",
+                placeholder: "Enter your email id",
+                showLable: true,
+                arrayentElementsClass: '',
+                lableText: 'City',
+                value: ["Surat", "Baroda", "Rajkot", "Ahemdabad"],
+                IsRequied: true
+            },
+            {
+                id: 6,
+                class: "contact100-form-btn",
+                type: "button",
+                placeholder: "",
+                showLable: true,
+                arrayentElementsClass: '',
+                lableText: 'Submit',
+                value: "",
+                IsRequied: true
+            },
+            {
+                id: 7,
+                class: "contact100-form-btn",
+                type: "button",
+                placeholder: "",
+                showLable: true,
+                arrayentElementsClass: '',
+                lableText: 'Cancel',
+                value: "",
+                IsRequied: true
+            }
+        ];
+        let validations = "";
+        let pattern = "";
+        // let idnumber = "";
+        // Errors = "";
+        // Element Create
+        const coomanAttriblte = ['id', 'class', 'value'];
+        
+        abc.forEach((value, index, array) => {
+            // let span = "span";
+            // idnumber += value.id;
+            // let n = value.id;
+            // let id = n.toString();
+            let div = '';
+            let lable = '';
+            let ele = '';
+            let radiovalue = value.value;
+            validations = value.validations;
+            div = document.createElement('div');
+            div.setAttribute("class", "wrap-input100 validate-input");
+            for (let value of Object.values(validations)) {
+                pattern = value.pattern;
+                Errors = value.errorMessage;
+            }
+
+            div = document.createElement('div');
+            div.setAttribute("class", "wrap-input100 validate-input");
+
+            if (value.arrayentElementsClass) {
+                div.class = value.arrayentElementsClass;
+            }
+            if (value.showLable && value.type !== 'button') {
+                lable = document.createElement('lable');
+                lable.innerHTML = value.lableText;
+                lable.setAttribute('for', value.id);
+                div.appendChild(lable);
+            }
+            // Is Requied Value True create to Start Red
+            if (value.IsRequied === true && value.type !== 'button') {
+                span = document.createElement(span);
+                span.setAttribute("style", "margin-left: 10px; color: red;font-size: 24px;");
+                span.innerHTML = "*";
+                div.appendChild(span);
+            }
+            // Radio Button And Checkbox Button Create
+            if (value.type === "radio" || value.type === "checkbox") {
+                for (let i = 0; i < radiovalue.length; i++) {
+                    br = document.createElement('br');
+                    div.appendChild(br);
+                    input = document.createElement('input');
+                    input.type = value.type;
+                    input.id = radiovalue[i];
+                    input.setAttribute("style", "margin: 3%; margin-left: 20%;")
+                    input.name = value.lableText;
+                    if (radiovalue[i] === value.defultchecked) {
+                        input.setAttribute("checked", "");
+                    }
+                    div.appendChild(input);
+                    // Radio Button And Checkbox Lable Create
+                    lable = document.createElement('lable');
+                    lable.innerHTML = radiovalue[i];
+                    lable.setAttribute("for", radiovalue[i]);
+                    div.appendChild(lable);
+                }
+                document.getElementById('myFrom').appendChild(div);
+            }
+            if (value.type === 'select') {
+                select = document.createElement('select')
+                select.setAttribute("style", "margin-left: 20%;")
+                br = document.createElement('br');
+                div.appendChild(br);
+                for (let i = 0; i < radiovalue.length; i++) {
+                    option = document.createElement('option');
+                    option.setAttribute("value", radiovalue[i])
+                    option.innerHTML = radiovalue[i];
+                    select.appendChild(option);
+                }
+                div.appendChild(select);
+                document.getElementById('myFrom').appendChild(div);
+            }
+            if (value.type === 'button') {
+                button = document.createElement('button');
+                button.className = value.class,
+                    button.setAttribute("style", "background-color: darkslategrey;")
+                button.innerHTML = value.lableText;
+                div.appendChild(button);
+                document.getElementById('myFrom').appendChild(div);
+            }
+            if (value.type && value.type !== 'select' && value.type !== 'radio' && value.type !== 'checkbox' && value.type !== 'button') {
+               
+                ele = document.createElement('input');
+                ele.type = value.type;
+                ele.setAttribute("id", id);
+                ele.className = value.class;
+                ele.setAttribute('placeholder', value.placeholder),
+                //     ele.setAttribute('onblur', "validate()"),
+                //     span = document.createElement("span");
+                // span.setAttribute("style", "margin-left: 10px; color: red;");
+                // span.innerHTML = Errors;
+                // div.appendChild(span)
+                    ele.value = value.value;
+                ele.isValid = true, false
+              
+                div.appendChild(ele);
+                document.getElementById('myFrom').appendChild(div);     
+            }  
+        });
+      
+       
+    </script>
+</body>
+</html>
